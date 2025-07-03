@@ -5,8 +5,8 @@ from fastapi.responses import JSONResponse
 from utils.errors import error_handler
 
 app = FastAPI(
-    title="Too Lazy as a Service",
-    description="The ultimate API for procrastination and excuse generation",
+    title="Too Lazy as a Service 🦥",
+    description="API for procrastination and excuse generation 💤",
     version="0.02"
 )
 
