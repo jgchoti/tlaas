@@ -61,7 +61,11 @@ async def get_excuse_by_category(category: str,  tag: str = Query("general", des
 async def get_custom_excuse(payload: CustomExcuseRequest):
     refusal = api_refuse()
     if refusal:
-        return refusal
+        return CustomExcuseResponse(
+            excuse=refusal["excuse"],
+            topic="(refusal)",
+            believability=refusal.get("status", "Probably not believable")
+        )
     task = payload.task
     templates = [
         f"I was too busy researching about {task}.",
@@ -82,7 +86,8 @@ async def get_custom_excuse(payload: CustomExcuseRequest):
    
     excuse = random.choice(templates)
     return CustomExcuseResponse(
-        excuses=excuse,
+        excuse=excuse,
         topic=task,
         believability="Varies by audience"
     )
+  

@@ -10,7 +10,7 @@ class CustomExcuseRequest(BaseModel):
     task: str
 
 class CustomExcuseResponse(BaseModel):
-    excuses: str
+    excuse: str
     topic: str
     believability: str = "Varies by audience"
         
