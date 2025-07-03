@@ -4,7 +4,7 @@
 
 ![lazy cat](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTNscTVxemZyNWxqZWE3dmo0aGw5dWR4aWc3MjJhMXh5ancxZXhvYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/pVkmGyqYRt4qY/giphy.gif)
 
----
+
 
 This is a personal project I created to learn FastAPI in Python.
 
