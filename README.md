@@ -7,8 +7,5 @@ It’s a playful API that mostly just refuses requests because it’s too lazy t
 
 ### Disclaimer:
 
-If you're a future employer or future teammate:
-
-- This project is meant to be fun and does not represent my actual work ethic or personality. (Well… maybe just a little.)
-
-The API is built purely for the sake of practicing API design, request handling, and having fun while learning.
+- If you're a future employer or future teammate: This project is meant to be fun and does not represent my actual work ethic or personality. (Well… maybe just a little.)
+- The API is built purely for the sake of practicing API design, request handling, and having fun while learning.
