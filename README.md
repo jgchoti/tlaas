@@ -82,7 +82,7 @@ Response:
 }
 ```
 
----
+
 
 ### ✨ Future Ideas (or maybe not, I’m lazy)
 
@@ -90,6 +90,7 @@ Response:
 - Frontend for lazy click-to-excuse generation
 - AI-powered excuse generation (via OpenAI or LLMs)
 
+---
 ### Disclaimer:
 
 - If you're a future employer or future teammate: This project is meant to be fun and does **not represent my actual work ethic or personality.** (Well… maybe just a little.)
