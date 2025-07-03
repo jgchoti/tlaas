@@ -1,7 +1,7 @@
 from random import random, choice
 
-def api_refuse(chance: float = 0.3):
-    if random() < chance:
+def api_refuse():
+    if random() < 0.7:
         lazy_messages = [
             "Nah. Too lazy to do that right now.",
             "Hmm... no thanks.",
