@@ -8,11 +8,11 @@
 
 This is a personal project I created to learn FastAPI in Python.
 
-It’s a playful excuse-generating API that’s mostly too lazy to do anything… 
+It’s a playful excuse-generating API that’s mostly too lazy to do anything…
 but when it does, it response with a solid (and very questionable) excuses for any occasion.
 
+#### 📀 Tech Stack: FastAPI, Uvicorn, Docker, Render
 
-#### 📀 Tech Stack: FastAPI, Uvicorn, Docker, Render ###
 ---
 
 ## 🧪 Features
@@ -23,6 +23,8 @@ but when it does, it response with a solid (and very questionable) excuses for a
 - `GET /excuse/categories` – See available categories/tags.
 - `POST /excuse/custom` – Generate a custom excuse for any task.
 - (lazy) error messages included.
+- Random “too lazy to work” refusals
+
 ---
 
 ## 🔎 API Documentation
@@ -35,10 +37,19 @@ Or if you prefer ReDoc style:
 
 🟢 [https://too-lazy-as-a-service.onrender.com/redoc](https://too-lazy-as-a-service.onrender.com/redoc)
 
-
 ## 🔥 Example Usage
 
+### Example Lazy Refusal Response
+
+```json
+{
+  "excuse": "Nah. Too lazy to do that right now.",
+  "status": "the API is refusing to work. Try again later (or don’t)"
+}
+```
+
 ### `GET /excuse`
+
 ```json
 {
   "excuse": "I'm on a productivity detox program.",
@@ -47,12 +58,14 @@ Or if you prefer ReDoc style:
 ```
 
 ### `GET /excuse/work?tag=cat`
+
 ```json
 {
   "excuse": "My cat deleted my files by walking on the keyboard.",
   "category": "work"
 }
 ```
+
 ### `POST /excuse/custom`
 
 ```json
@@ -60,6 +73,7 @@ Or if you prefer ReDoc style:
 ```
 
 Response:
+
 ```json
 {
   "excuse": "I got distracted by the documentary about folding laundry.",
@@ -67,6 +81,7 @@ Response:
   "believability": "Varies by audience"
 }
 ```
+
 ---
 
 ### ✨ Future Ideas (or maybe not, I’m lazy)
@@ -74,9 +89,8 @@ Response:
 - Rate limiting (“You’ve asked for too many excuses. Try being productive.”)
 - Frontend for lazy click-to-excuse generation
 - AI-powered excuse generation (via OpenAI or LLMs)
-  
+
 ### Disclaimer:
 
 - If you're a future employer or future teammate: This project is meant to be fun and does **not represent my actual work ethic or personality.** (Well… maybe just a little.)
 - The API is built purely for the sake of practicing API design, request handling, and having fun while learning.
-
