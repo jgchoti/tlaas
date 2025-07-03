@@ -3,17 +3,20 @@ from typing import List
 import random
 from model.excuse_models import ExcuseResponse, CustomExcuseRequest, CustomExcuseResponse
 from data.excuses import excuses
+from utils.refuse import api_refuse
 
 router = APIRouter(prefix="/excuse", tags=["Excuses"])
 
 @router.get("/", response_model=ExcuseResponse)
 async def get_excuse():
+    api_refuse()
     excuse = random.choice(excuses)
     category = excuse["tags"][0] if excuse.get("tags") else "general"
     return ExcuseResponse(excuse=excuse["excuse"], category=category)
 
 @router.get("/categories")
 async def get_categories():
+    api_refuse()
     categories_set = set()
     for e in excuses:
         categories_set.update(e.get("tags", []))
@@ -24,6 +27,7 @@ async def get_categories():
 
 @router.get("/{category}", response_model=ExcuseResponse)
 async def get_excuse_by_category(category: str,  tag: str = Query("general", description="Filter excuses by tag")):
+    api_refuse()
     categories_set = set(t for e in excuses for t in e.get("tags", []))
     filtered = [
         e for e in excuses 
@@ -44,6 +48,7 @@ async def get_excuse_by_category(category: str,  tag: str = Query("general", des
 
 @router.post("/custom", response_model=CustomExcuseResponse)
 async def get_custom_excuse(payload: CustomExcuseRequest):
+    api_refuse()
     task = payload.task
     templates = [
         f"I was too busy researching about {task}.",
@@ -61,6 +66,7 @@ async def get_custom_excuse(payload: CustomExcuseRequest):
         f"I was stress-eating about having to do {task}.",
         f"My lucky '{task}' socks were in the wash."
     ]
+   
     excuse = random.choice(templates)
     return CustomExcuseResponse(
         excuses=excuse,
