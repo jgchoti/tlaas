@@ -1,4 +1,4 @@
-# 🦥 TLaaS – Too Lazy as a Service (FastAPI Practice Project)
+# 🦥 TLaaS – Too Lazy as a Service 
 
 (But let’s be honest, you're probably too lazy to read it.....)
 
