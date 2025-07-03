@@ -6,7 +6,9 @@ router = APIRouter()
 
 @router.get("/")
 async def root():
-    api_refuse()
+    refusal = api_refuse()
+    if refusal:
+        return refusal
     now = datetime.now(timezone.utc).isoformat()
     return {
         "message": "Welcome to Too Lazy as a Service! 🦥",
