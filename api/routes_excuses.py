@@ -11,10 +11,15 @@ router = APIRouter(prefix="/excuse", tags=["Excuses"])
 async def get_excuse():
     refusal = api_refuse()
     if refusal:
-        return refusal
+        return ExcuseResponse(
+            excuse=refusal["excuse"],
+            category="Who Care?",
+            api_status=refusal.get("status")
+        )
     excuse = random.choice(excuses)
     category = excuse["tags"][0] if excuse.get("tags") else "general"
     return ExcuseResponse(excuse=excuse["excuse"], category=category)
+  
 
 @router.get("/categories")
 async def get_categories():
