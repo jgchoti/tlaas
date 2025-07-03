@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException, Query
-from typing import List
 import random
 from model.excuse_models import ExcuseResponse, CustomExcuseRequest, CustomExcuseResponse
 from data.excuses import excuses
@@ -19,31 +18,40 @@ async def get_excuse():
     excuse = random.choice(excuses)
     category = excuse["tags"][0] if excuse.get("tags") else "general"
     return ExcuseResponse(excuse=excuse["excuse"], category=category)
-  
+
 
 @router.get("/categories")
 async def get_categories():
     refusal = api_refuse()
     if refusal:
-        return refusal
+        return {
+            "excuse": refusal["excuse"],
+            "category": "Who Care?",
+            "api_status": refusal.get("status")
+        }
     categories_set = set()
     for e in excuses:
         categories_set.update(e.get("tags", []))
     return {
         "categories": list(categories_set),
-        "total_excuses": (len(categories_set))
+        "total_excuses": len(categories_set)
     }
 
+
 @router.get("/{category}", response_model=ExcuseResponse)
-async def get_excuse_by_category(category: str,  tag: str = Query("general", description="Filter excuses by tag")):
+async def get_excuse_by_category(category: str, tag: str = Query("general", description="Filter excuses by tag")):
     refusal = api_refuse()
     if refusal:
-        return refusal
+        return ExcuseResponse(
+            excuse=refusal["excuse"],
+            category="Who Care?",
+            api_status=refusal.get("status")
+        )
     categories_set = set(t for e in excuses for t in e.get("tags", []))
     filtered = [
-        e for e in excuses 
-        if category.lower() in (t for t in e.get("tags", []))
-        and tag.lower() in (t for t in e.get("tags", []))
+        e for e in excuses
+        if category.lower() in (t.lower() for t in e.get("tags", []))
+        and tag.lower() in (t.lower() for t in e.get("tags", []))
     ]
     if not filtered:
         raise HTTPException(
@@ -56,6 +64,7 @@ async def get_excuse_by_category(category: str,  tag: str = Query("general", des
         )
     chosen = random.choice(filtered)
     return ExcuseResponse(excuse=chosen["excuse"], category=category)
+
 
 @router.post("/custom", response_model=CustomExcuseResponse)
 async def get_custom_excuse(payload: CustomExcuseRequest):
@@ -83,11 +92,10 @@ async def get_custom_excuse(payload: CustomExcuseRequest):
         f"I was stress-eating about having to do {task}.",
         f"My lucky '{task}' socks were in the wash."
     ]
-   
+
     excuse = random.choice(templates)
     return CustomExcuseResponse(
         excuse=excuse,
         topic=task,
         believability="Varies by audience"
     )
-  
