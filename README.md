@@ -1,6 +1,6 @@
 # 🐢 TLaaS – Too Lazy as a Service (FastAPI Practice Project)
 
-This is a personal project I created to learn FastAPI in Python because I believe the best way to learn is by building.
+This is a personal project I created to learn FastAPI in Python.
 
 It’s a playful API that mostly just refuses requests because it’s too lazy to help. 
 
