@@ -9,14 +9,18 @@ router = APIRouter(prefix="/excuse", tags=["Excuses"])
 
 @router.get("/", response_model=ExcuseResponse)
 async def get_excuse():
-    api_refuse()
+    refusal = api_refuse()
+    if refusal:
+        return refusal
     excuse = random.choice(excuses)
     category = excuse["tags"][0] if excuse.get("tags") else "general"
     return ExcuseResponse(excuse=excuse["excuse"], category=category)
 
 @router.get("/categories")
 async def get_categories():
-    api_refuse()
+    refusal = api_refuse()
+    if refusal:
+        return refusal
     categories_set = set()
     for e in excuses:
         categories_set.update(e.get("tags", []))
@@ -27,7 +31,9 @@ async def get_categories():
 
 @router.get("/{category}", response_model=ExcuseResponse)
 async def get_excuse_by_category(category: str,  tag: str = Query("general", description="Filter excuses by tag")):
-    api_refuse()
+    refusal = api_refuse()
+    if refusal:
+        return refusal
     categories_set = set(t for e in excuses for t in e.get("tags", []))
     filtered = [
         e for e in excuses 
@@ -48,7 +54,9 @@ async def get_excuse_by_category(category: str,  tag: str = Query("general", des
 
 @router.post("/custom", response_model=CustomExcuseResponse)
 async def get_custom_excuse(payload: CustomExcuseRequest):
-    api_refuse()
+    refusal = api_refuse()
+    if refusal:
+        return refusal
     task = payload.task
     templates = [
         f"I was too busy researching about {task}.",
